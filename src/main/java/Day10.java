@@ -50,18 +50,18 @@ public class Day10 {
             System.out.println("file not found");
         }
 
-        partOne(bots);
-        partTwo(bots);
+        int value1 = 61, value2 = 17;
+        partOne(bots, value1, value2);
+
+        int output1 = 0, output2 = 1, output3 = 2;
+        partTwo(bots, output1, output2, output3);
     }
 
-    private static void partOne(List<String> bots) {
+    public static int partOne(List<String> bots, int value1, int value2) {
         Map<Integer, Bot> botMap = buildBotMap(bots);
-//         botMap.forEach((key, value) -> System.out.println(key + ", " + value.toString()));
 
-        int value1 = 61, value2 = 17;
         while (botMap.values().stream()
                 .noneMatch(bot -> bot.values.size() == 2 && bot.values.contains(value1) && bot.values.contains(value2))) {
-
             List<Integer> botsWithTwoChips = botMap.entrySet().stream()
                     .filter(bot -> bot.getValue().values.size() == 2)
                     .map(Map.Entry::getKey)
@@ -83,7 +83,7 @@ public class Day10 {
             }
         }
 
-        int matchingBot = botMap.entrySet().stream()
+        int res = botMap.entrySet().stream()
                 .filter(bot -> bot.getValue().values.size() == 2
                         && bot.getValue().values.contains(value1)
                         && bot.getValue().values.contains(value2))
@@ -91,17 +91,15 @@ public class Day10 {
                 .map(Map.Entry::getKey)
                 .get();
 
-        System.out.println("Part One: " + matchingBot);
+        System.out.println("Day10 Part One Result: " + res);
+        return res;
     }
 
-    private static void partTwo(List<String> bots) {
+    public static int partTwo(List<String> bots, int output1, int output2, int output3) {
         Map<Integer, Bot> botMap = buildBotMap(bots);
-
         Map<Integer, Integer> outputs = new HashMap<>();
 
-        // Process
-        while (!outputs.containsKey(0) || !outputs.containsKey(1) || !outputs.containsKey(2)) {
-
+        while (!outputs.containsKey(output1) || !outputs.containsKey(output2) || !outputs.containsKey(output3)) {
             List<Integer> botsWithTwoChips = botMap.entrySet().stream()
                     .filter(bot -> bot.getValue().values.size() == 2).map(Map.Entry::getKey).collect(Collectors.toList());
 
@@ -125,7 +123,10 @@ public class Day10 {
             }
         }
 
-        System.out.println("Part Two: " + outputs.get(0) * outputs.get(1) * outputs.get(2));
+        int res = outputs.get(output1) * outputs.get(output2) * outputs.get(output3);
+        System.out.println("Day10 Part Two Result: " + res);
+
+        return res;
     }
 
     private static Map<Integer, Bot> buildBotMap(List<String> bots) {
@@ -142,7 +143,7 @@ public class Day10 {
                     botMap.put(botNum, new Bot());
                 }
                 botMap.get(botNum).values.add(value);
-            } else {
+            } else if (bot[0].equals("bot")) {
                 int bot1 = Integer.parseInt(bot[1]);
                 boolean isLowBot = bot[5].equals("bot");
                 int bot2 = Integer.parseInt(bot[6]);
@@ -160,6 +161,7 @@ public class Day10 {
             }
         });
 
+//        botMap.forEach((key, value) -> System.out.println(key + ", " + value.toString()));
         return botMap;
     }
 }

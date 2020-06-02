@@ -24,46 +24,16 @@ public class Day4 {
         }
 
         partOne(rooms);
-        partTwo(rooms);
-        partTwo(Collections.singletonList("qzmt-zixmtkozy-ivhz-343[vxcbvn]"));
+
+        String target = "northpoleobjectstorage";
+        partTwo(rooms, target);
     }
 
-    private static void partTwo(List<String> rooms) {
-        rooms.forEach(room -> {
-            String[] r = room.split("-");
-
-            String lastElement = r[r.length - 1];
-            int splitIndex = lastElement.indexOf("[");
-            String id = lastElement.substring(0, splitIndex);
-
-            StringBuilder name = new StringBuilder();
-
-            for (int i = 0; i < r.length - 1; i++) {
-                name.append(r[i]);
-            }
-
-//            System.out.println(name);
-
-            StringBuilder validation = new StringBuilder();
-
-            for (char c : name.toString().toCharArray()) {
-                validation.append((char)((c - 'a'+ Integer.parseInt(id)) % 26 + 'a'));
-            }
-
-            // System.out.println(validation.toString());
-            if (validation.toString().equals("northpoleobjectstorage")) {
-                System.out.println("Part Two: " + id);
-                return;
-            }
-        });
-    }
-
-    private static void partOne(List<String> rooms) {
-        List<Integer> res = new ArrayList<>();
+    public static int partOne(List<String> rooms) {
+        List<Integer> validRoom = new ArrayList<>();
 
         rooms.forEach(room -> {
             String[] r = room.split("-");
-//            Arrays.asList(r).forEach(System.out::println);
             Map<Character, Integer> map = new HashMap<>();
 
             for (int i = 0; i < r.length - 1; i++) {
@@ -87,19 +57,70 @@ public class Day4 {
                     })
                     .forEach(m -> nameValidation.append(m.getKey()));
 
-//            System.out.println(nameValidation.toString());
 
             String lastElement = r[r.length - 1];
             int splitIndex = lastElement.indexOf("[");
+
+            if (splitIndex == -1 ) {
+                System.out.println("Day4 Part One Invalid input");
+                return;
+            }
+
             String id = lastElement.substring(0, splitIndex);
             String checksum = lastElement.substring(splitIndex + 1, lastElement.length() - 1);
 
-//            System.out.println(checksum.substring(0, 5));
             if ((nameValidation.toString().substring(0, 5)).equals(checksum.substring(0, 5))) {
-                res.add(Integer.valueOf(id));
+                validRoom.add(Integer.valueOf(id));
             }
         });
 
-        System.out.println("Part One: " + res.stream().mapToInt(Integer::intValue).sum());
+        if (validRoom.isEmpty()) {
+            return -1;
+        }
+
+        int result = validRoom.stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Day4 Part One Result: " + result);
+
+        return result;
+    }
+
+    public static int partTwo(List<String> rooms, String target) {
+        int[] res = new int[1];
+        res[0] = -1;
+
+        rooms.forEach(room -> {
+            String[] r = room.split("-");
+
+            String lastElement = r[r.length - 1];
+            int splitIndex = lastElement.indexOf("[");
+
+            if (splitIndex == -1 ) {
+                System.out.println("Day4 Part Two Invalid input");
+                return;
+            }
+
+            String id = lastElement.substring(0, splitIndex);
+
+            StringBuilder name = new StringBuilder();
+
+            for (int i = 0; i < r.length - 1; i++) {
+                name.append(r[i]);
+            }
+
+            StringBuilder validation = new StringBuilder();
+
+            for (char c : name.toString().toCharArray()) {
+                validation.append((char)((c - 'a'+ Integer.parseInt(id)) % 26 + 'a'));
+            }
+
+            // System.out.println(validation.toString());
+            if (validation.toString().equals(target)) {
+                res[0] = Integer.parseInt(id);
+                System.out.println("Day4 Part Two Result: " + id);
+                return;
+            }
+        });
+
+        return res[0];
     }
 }
