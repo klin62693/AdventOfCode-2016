@@ -33,7 +33,7 @@ Run
 ---
 If you have any IDE such as [IntelliJ](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/), it is simple to run with your IDE.
 
-If you don't have any IDE on your computer, here is the instruction to run with the _Maven commands_.
+If you don't have any IDE on your computer, here is the instruction to run with the [_Maven commands_](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html).
 ### Maven Commands
 **Open your teminal and go the directionary of this repository**
 
@@ -43,6 +43,23 @@ If you only wanna see the result of the test cases, run this command `mvn test`
 
 If you wanna see the result of program, run with this command `java -cp target/AdventOfCode-2016-1.0-SNAPSHOT.jar main.java.ApplicationStarter`
 
+Project
+-------
+### Structure
+I did Day 1, Day 4 and Day 10 challenges.
+
+For each day challenge, there are two parts question to solve. 
+
+I seperate each day into different files and Each file is a class.
+
+Inside each class, since there are two parts of question, I created two method to solve the question which are _partOne()_ and _partTwo()_
+
+Each method will print out the result.
+
+### Test Case
+- For each day challenge, I have _two_ test cases for each part. 
+
+- One is for testing the success case and anothor one is testing for the fail case such as invalid input.
 
 Contact
 -------
