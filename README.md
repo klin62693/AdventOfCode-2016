@@ -6,7 +6,7 @@ Before Run
 ----------
 The language I used is Java and this is a Maven project. 
 
-Outside the input from AoC, I added some test cases by using _**@JUnit**_.
+Outside the input from AoC, I added some test cases by using [_**@JUnit**_](https://github.com/junit-team/junit5/).
 
 So to run this project, you may need to set up the environment first, download and install _**Java**_ and _**Maven**_ first.
 
@@ -35,16 +35,14 @@ If you have any IDE such as [IntelliJ](https://www.jetbrains.com/idea/) or [Ecli
 
 If you don't have any IDE on your computer, here is the instruction to run with the _Maven commands_.
 ### Maven Commands
+**Open your teminal and go the directionary of this repository**
 
-`mvn clean install`
+To run and install the program, use this command `mvn clean install`
 
-`mvn test`
+If you only wanna see the result of the test cases, run this command `mvn test`
 
-`java -cp target/AdventOfCode-2016-1.0-SNAPSHOT.jar main.java.ApplicationStarter`
+If you wanna see the result of program, run with this command `java -cp target/AdventOfCode-2016-1.0-SNAPSHOT.jar main.java.ApplicationStarter`
 
-or
-
-`java -cp AdventOfCode-2016-1.0-SNAPSHOT.jar ApplicationStarter`
 
 Contact
 -------
