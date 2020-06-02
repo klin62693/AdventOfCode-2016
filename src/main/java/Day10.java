@@ -60,6 +60,11 @@ public class Day10 {
     public static int partOne(List<String> bots, int value1, int value2) {
         Map<Integer, Bot> botMap = buildBotMap(bots);
 
+        if (botMap.containsKey(-1)) {
+            System.out.println("Day10 Part One input invalid");
+            return -1;
+        }
+
         while (botMap.values().stream()
                 .noneMatch(bot -> bot.values.size() == 2 && bot.values.contains(value1) && bot.values.contains(value2))) {
             List<Integer> botsWithTwoChips = botMap.entrySet().stream()
@@ -97,11 +102,18 @@ public class Day10 {
 
     public static int partTwo(List<String> bots, int output1, int output2, int output3) {
         Map<Integer, Bot> botMap = buildBotMap(bots);
+
+        if (botMap.containsKey(-1)) {
+            System.out.println("Day10 Part Two input invalid");
+            return -1;
+        }
+
         Map<Integer, Integer> outputs = new HashMap<>();
 
         while (!outputs.containsKey(output1) || !outputs.containsKey(output2) || !outputs.containsKey(output3)) {
             List<Integer> botsWithTwoChips = botMap.entrySet().stream()
-                    .filter(bot -> bot.getValue().values.size() == 2).map(Map.Entry::getKey).collect(Collectors.toList());
+                    .filter(bot -> bot.getValue().values.size() == 2)
+                    .map(Map.Entry::getKey).collect(Collectors.toList());
 
             for (int botNum : botsWithTwoChips) {
                 Bot bot = botMap.get(botNum);
@@ -158,6 +170,8 @@ public class Day10 {
                 botMap.get(bot1).low = bot2;
                 botMap.get(bot1).isHighBot = isHighBot;
                 botMap.get(bot1).high = bot3;
+            } else {
+                botMap.put(-1, null);
             }
         });
 

@@ -31,6 +31,7 @@ public class Day10Test {
     @Test
     public void testPartOneFail() {
         List<String> bots = new ArrayList<>();
+        bots.add("value 7 goes to bot 32");
         bots.add("123");
 
         int value1 = 5, value2 = 2;
@@ -42,8 +43,30 @@ public class Day10Test {
 
     @Test
     public void testPartTwoSuccess() {
-        List<String> bots = new ArrayList<>();
+        ArrayList<String> bots = new ArrayList<>();
 
+        bots.add("value 5 goes to bot 2");
+        bots.add("bot 2 gives low to bot 1 and high to bot 0");
+        bots.add("value 3 goes to bot 1");
+        bots.add("bot 1 gives low to output 1 and high to bot 0");
+        bots.add("bot 0 gives low to output 2 and high to output 0");
+        bots.add("value 2 goes to bot 2");
 
+        int res = Day10.partTwo(bots, 0, 1, 2);
+        int expected = 30;
+
+        Assert.assertEquals(expected, res);
+    }
+
+    @Test
+    public void testPartTwoFail() {
+        ArrayList<String> bots = new ArrayList<>();
+        bots.add("value 7 goes to bot 32");
+        bots.add("123");
+
+        int res = Day10.partTwo(bots, 0, 1, 2);
+        int expected = -1;
+
+        Assert.assertEquals(expected, res);
     }
 }
