@@ -42,6 +42,10 @@ If you don't have any IDE on your computer, here is the instruction to run with 
 
 `java -cp target/AdventOfCode-2016-1.0-SNAPSHOT.jar main.java.ApplicationStarter`
 
+or
+
+`java -cp AdventOfCode-2016-1.0-SNAPSHOT.jar ApplicationStarter`
+
 Contact
 -------
 If you have any question about this repository, please contact me by klin62693@gmail.com.
